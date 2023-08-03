@@ -9,7 +9,7 @@ namespace DotnetCoding.Core.Interfaces
 {
     public interface IGenericRepository<T> where T : class
     {
-        Task<IEnumerable<T>> GetAll(long productID, DateTime requestedDate, decimal productPrice);
+        Task<IEnumerable<T>> GetAll(string productName, DateTime requestedDate, decimal productPrice);
         Task<IEnumerable<PendingApprovalQueue>> GetPendingApprovalProducts();
 
         Task<bool> CreateProduct(T entity);

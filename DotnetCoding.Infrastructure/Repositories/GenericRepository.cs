@@ -37,7 +37,7 @@ namespace DotnetCoding.Infrastructure.Repositories
                 return true;
             }
         }
-        public virtual async Task<IEnumerable<T>> GetAll(long productID, DateTime createdDate, decimal productPrice)
+        public virtual async Task<IEnumerable<T>> GetAll(string productName, DateTime createdDate, decimal productPrice)
         {
             return await _dbContext.Set<T>().ToListAsync();
         }

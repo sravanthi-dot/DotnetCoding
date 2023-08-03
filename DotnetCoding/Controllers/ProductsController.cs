@@ -21,9 +21,9 @@ namespace DotnetCoding.Controllers
         /// </summary>
         /// <returns></returns>
         [HttpGet("all-products")]
-        public async Task<IActionResult> GetProductList(long productID, DateTime createdDate, decimal productPrice)
+        public async Task<IActionResult> GetProductList(string productName, DateTime createdDate, decimal productPrice)
         {
-            var productDetailsList = await _productService.GetAllProducts(productID, createdDate, productPrice);
+            var productDetailsList = await _productService.GetAllProducts(productName, createdDate, productPrice);
             
             if(productDetailsList == null)
             {

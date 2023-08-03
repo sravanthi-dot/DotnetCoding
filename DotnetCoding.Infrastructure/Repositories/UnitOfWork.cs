@@ -11,16 +11,13 @@ namespace DotnetCoding.Infrastructure.Repositories
     {
         private readonly masterContext _dbContext;
         public IProductRepository Products { get; }
-        public IPendingApprovalRepository PendingApprovalQueue { get; }
-
 
         public UnitOfWork(masterContext dbContext,
-                            IProductRepository productRepository,
-                            IPendingApprovalRepository pendingApprovalQueue)
+                            IProductRepository productRepository
+                            )
         {
             _dbContext = dbContext;
             Products = productRepository;
-            PendingApprovalQueue = pendingApprovalQueue;
         }
 
         public int Save()

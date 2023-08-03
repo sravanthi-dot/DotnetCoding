@@ -1,12 +1,16 @@
+using DotnetCoding.Core.Interfaces;
+using DotnetCoding.Core.Models;
 using DotnetCoding.Infrastructure.ServiceExtension;
 using DotnetCoding.Services;
 using DotnetCoding.Services.Interfaces;
+using Microsoft.AspNetCore.Hosting;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddDIServices(builder.Configuration);
 builder.Services.AddScoped<IProductService, ProductService>();
+
 
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle

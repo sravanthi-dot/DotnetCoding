@@ -24,26 +24,28 @@ namespace DotnetCoding.Services
             return product;
         }
 
-        public Task<bool> DeleteProduct(int productId)
+        public async Task<bool> DeleteProduct(int productId)
         {
-            throw new NotImplementedException();
+            var product = await _unitOfWork.Products.DeleteProduct(productId);
+            return product;
         }
 
-        public async Task<IEnumerable<ProductDetails>> GetAllProducts(long productID, DateTime requestedDate, decimal productPrice)
+        public async Task<IEnumerable<ProductDetails>> GetAllProducts(string productName, DateTime requestedDate, decimal productPrice)
         {
-            var productDetailsList = await _unitOfWork.Products.GetAll(productID, requestedDate, productPrice);
+            var productDetailsList = await _unitOfWork.Products.GetAll(productName, requestedDate, productPrice);
             return productDetailsList;
         }
 
         public async Task<IEnumerable<PendingApprovalQueue>> GetPendingApprovalProducts()
         {
-            var productDetailsList = await _unitOfWork.PendingApprovalQueue.GetPendingApprovalProducts();
+            var productDetailsList = await _unitOfWork.Products.GetPendingApprovalProducts();
             return productDetailsList;
         }
 
-        public Task<bool> UpdateProduct(ProductDetails productDetails)
+        public async Task<bool> UpdateProduct(ProductDetails productDetails)
         {
-            throw new NotImplementedException();
+            var product = await _unitOfWork.Products.UpdateProduct(productDetails);
+            return product;
         }
     }
 }

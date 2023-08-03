@@ -9,26 +9,26 @@ namespace DotnetCoding.Infrastructure.Repositories
     public class ProductRepository : GenericRepository<ProductDetails>, IProductRepository
     {
         private readonly masterContext _context;
-        protected readonly ILogger _logger;
+        //protected readonly ILogger _logger;
 
-        public ProductRepository(masterContext dbContext, ILogger logger) : base(dbContext)
+        public ProductRepository(masterContext dbContext) : base(dbContext)
         {
             _context = dbContext;
-            _logger = logger;
+            //_logger = logger;
         }
 
-        public override async Task<IEnumerable<ProductDetails>> GetAll(long productID, DateTime createdDate, decimal productPrice)
+        public override async Task<IEnumerable<ProductDetails>> GetAll(string productName, DateTime createdDate, decimal productPrice)
         {
             try
             {
                 var products = await _context.MasProducts
                     .Where(c => c.IsActive == true && c.ProductPrice == productPrice 
-                            && c.CreatedDate == createdDate && c.ProductId == productID)
+                            && c.CreatedDate == createdDate && c.ProductName == productName)
                     .OrderByDescending(a => a.CreatedDate).ToListAsync();
             }
             catch (Exception ex)
             {
-                _logger.LogError(ex, "{Repo} All function error", typeof(ProductRepository));
+                ////_logger.LogError(ex, "{Repo} All function error", typeof(ProductRepository));
             }
             return new List<ProductDetails>();
 
@@ -66,7 +66,7 @@ namespace DotnetCoding.Infrastructure.Repositories
             }
             catch (Exception ex)
             {
-                _logger.LogError(ex, "{Repo} GetPendingApprovalProducts() function error", typeof(ProductRepository));
+                //_logger.LogError(ex, "{Repo} GetPendingApprovalProducts() function error", typeof(ProductRepository));
             }
             return result;
 
@@ -131,7 +131,7 @@ namespace DotnetCoding.Infrastructure.Repositories
             }
             catch (Exception ex)
             {
-                _logger.LogError(ex, "{Repo} Create method error", typeof(ProductRepository));
+                //_logger.LogError(ex, "{Repo} Create method error", typeof(ProductRepository));
                 return false;
             }
         }
@@ -181,7 +181,7 @@ namespace DotnetCoding.Infrastructure.Repositories
             }
             catch (Exception ex)
             {
-                _logger.LogError(ex, "{Repo} Update method error", typeof(ProductRepository));
+                //_logger.LogError(ex, "{Repo} Update method error", typeof(ProductRepository));
                 return false;
             }
         }
@@ -216,7 +216,7 @@ namespace DotnetCoding.Infrastructure.Repositories
             }
             catch (Exception ex)
             {
-                _logger.LogError(ex, "{Repo} Delete function error", typeof(ProductRepository));
+                //_logger.LogError(ex, "{Repo} Delete function error", typeof(ProductRepository));
                 return false;
             }
         }

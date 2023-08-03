@@ -60,23 +60,23 @@ namespace DotnetCoding.UnitTest
             Assert.AreEqual(200, obj.StatusCode);
         }
         [TestMethod]
-        public async Task GetAllProducts_Returns_Ok(long productID, DateTime createdDate, decimal productPrice)
+        public async Task GetAllProducts_Returns_Ok(string productName, DateTime createdDate, decimal productPrice)
         {
 
             var productlist = _fixture.CreateMany<ProductDetails>(3).ToList();
             //_productServiceMock.Setup(repo => repo.GetAllProducts()).Returns(Task.FromResult<productlist>);
             _productsController = new ProductsController(_productServiceMock.Object);
-            var result = await _productsController.GetProductList(productID, createdDate, productPrice);
+            var result = await _productsController.GetProductList(productName, createdDate, productPrice);
             var obj = result as ObjectResult;
             Assert.AreEqual(200, obj.StatusCode);
         }
         [TestMethod]
-        public async Task GetAllProducts_Returns_Error(long productID, DateTime createdDate, decimal productPrice)
+        public async Task GetAllProducts_Returns_Error(string productName, DateTime createdDate, decimal productPrice)
         {
             var productlist = _fixture.CreateMany<ProductDetails>(3).ToList();
-            _productServiceMock.Setup(repo => repo.GetAllProducts(productID, createdDate, productPrice)).Throws(new Exception());
+            _productServiceMock.Setup(repo => repo.GetAllProducts(productName, createdDate, productPrice)).Throws(new Exception());
             _productsController = new ProductsController(_productServiceMock.Object);
-            var result = await _productsController.GetProductList(productID, createdDate, productPrice);
+            var result = await _productsController.GetProductList(productName, createdDate, productPrice);
             var obj = result as ObjectResult;
             Assert.AreEqual(400, obj.StatusCode);
         }

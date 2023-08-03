@@ -9,7 +9,7 @@ namespace DotnetCoding.Services.Interfaces
 {
     public interface IProductService
     {
-        Task<IEnumerable<ProductDetails>> GetAllProducts(long productID, DateTime requestedDate, decimal productPrice);
+        Task<IEnumerable<ProductDetails>> GetAllProducts(string productName, DateTime requestedDate, decimal productPrice);
         Task<IEnumerable<PendingApprovalQueue>> GetPendingApprovalProducts();
         Task<bool> CreateProduct(ProductDetails productDetails);
         Task<bool> UpdateProduct(ProductDetails productDetails);
